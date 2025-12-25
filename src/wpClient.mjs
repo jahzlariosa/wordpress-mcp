@@ -14,7 +14,7 @@ export function createWpClient({ wpUrl, wpUser, wpAppPass }, logger = console) {
         Authorization: authHeader,
         "Content-Type": "application/json",
         Accept: "application/json",
-        "User-Agent": "Ditoyan-MCP/1.0",
+        "User-Agent": "WordPressMCP/1.0",
         ...(options.headers || {}),
       },
     });

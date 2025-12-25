@@ -23,7 +23,7 @@ const wpClient = createWpClient(config);
 const resolvePostType = createPostTypeResolver({ wpFetch: wpClient.wpFetch });
 
 const server = new McpServer({
-  name: "ditoyan-wp",
+  name: "WordPressMCP",
   version: "0.1.0",
 });
 

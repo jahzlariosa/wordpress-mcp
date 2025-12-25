@@ -1,4 +1,4 @@
-# Ditoyan WordPress MCP Server
+# WordPressMCP Server
 
 Minimal MCP server that exposes WordPress REST tools over stdio. It supports
 posts, pages, users, plugins, and dynamic CPT routing via `type`/`post_type`.
@@ -31,7 +31,7 @@ npm start
 
 If your AI host uses a `config.toml` to register MCP servers, add an entry like:
 ```toml
-[mcp.servers.ditoyan-wp]
+[mcp.servers.WordPressMCP]
 command = "node"
 args = ["/absolute/path/to/server.mjs"]
 env = { WP_URL = "https://your-site.example", WP_USER = "your-username", WP_APP_PASS = "xxxx xxxx xxxx xxxx xxxx xxxx" }
