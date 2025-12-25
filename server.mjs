@@ -7,6 +7,7 @@ import { createWpClient } from "./src/wpClient.mjs";
 import { registerMetaTools } from "./src/tools/meta.mjs";
 import { registerPageTools } from "./src/tools/pages.mjs";
 import { registerPostTools } from "./src/tools/posts.mjs";
+import { registerTaxonomyTools } from "./src/tools/taxonomies.mjs";
 import { registerUserTools } from "./src/tools/users.mjs";
 
 // Entry point: load config, create client/resolver, register tools, and connect.
@@ -41,6 +42,7 @@ registerPageTools(server, {
   updatePostLike: wpClient.updatePostLike,
   resolvePostType,
 });
+registerTaxonomyTools(server, { wpFetch: wpClient.wpFetch });
 registerUserTools(server, { wpFetch: wpClient.wpFetch });
 
 console.error("MCP: tools registered");

@@ -3,7 +3,8 @@
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-jahzlariosa-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jahzlariosa)
 
 Minimal MCP server that exposes WordPress REST tools over stdio. It supports
-posts, pages, users, plugins, and dynamic CPT routing via `type`/`post_type`.
+posts, pages, categories, tags, users, plugins, and dynamic CPT routing via
+`type`/`post_type`.
 
 ## Requirements
 

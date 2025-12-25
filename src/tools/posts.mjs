@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { stringOrNumber, stringOrRaw } from "../schemas.mjs";
+import { stringOrNumber, stringOrNumberArray, stringOrRaw } from "../schemas.mjs";
 import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
 import { buildQuery, parseStatusOverride } from "../wpUtils.mjs";
@@ -19,10 +19,34 @@ export function registerPostTools(
       status: z.string().optional(),
       type: z.string().optional(),
       post_type: z.string().optional(),
+      categories: stringOrNumberArray.optional(),
+      tags: stringOrNumberArray.optional(),
+      categories_exclude: stringOrNumberArray.optional(),
+      tags_exclude: stringOrNumberArray.optional(),
     },
-    async ({ per_page = 10, page, search, status, type, post_type } = {}) => {
+    async ({
+      per_page = 10,
+      page,
+      search,
+      status,
+      type,
+      post_type,
+      categories,
+      tags,
+      categories_exclude,
+      tags_exclude,
+    } = {}) => {
       const postType = await resolvePostType(post_type || type);
-      const query = buildQuery({ per_page, page, search, status });
+      const query = buildQuery({
+        per_page,
+        page,
+        search,
+        status,
+        categories,
+        tags,
+        categories_exclude,
+        tags_exclude,
+      });
       const posts = await wpFetch(`/wp-json/wp/v2/${postType}${query}`);
 
       if (isWpError(posts)) {
@@ -64,6 +88,8 @@ export function registerPostTools(
       slug: z.string().optional(),
       type: z.string().optional(),
       post_type: z.string().optional(),
+      categories: stringOrNumberArray.optional(),
+      tags: stringOrNumberArray.optional(),
     },
     async ({
       title,
@@ -73,6 +99,8 @@ export function registerPostTools(
       slug,
       type,
       post_type,
+      categories,
+      tags,
     } = {}) => {
       console.error("MCP: create_post called with:", {
         title,
@@ -82,6 +110,8 @@ export function registerPostTools(
         slug,
         type,
         post_type,
+        categories,
+        tags,
       });
 
       const parsedStatus = parseStatusOverride(status);
@@ -96,6 +126,8 @@ export function registerPostTools(
         status: resolvedStatus,
         excerpt,
         slug,
+        categories,
+        tags,
       });
 
       if (isWpError(post)) {
@@ -166,6 +198,8 @@ export function registerPostTools(
       slug: z.string().optional(),
       type: z.string().optional(),
       post_type: z.string().optional(),
+      categories: stringOrNumberArray.optional(),
+      tags: stringOrNumberArray.optional(),
     },
     async ({
       id,
@@ -176,6 +210,8 @@ export function registerPostTools(
       slug,
       type,
       post_type,
+      categories,
+      tags,
     } = {}) => {
       console.error("MCP: update_post called with:", {
         id,
@@ -186,6 +222,8 @@ export function registerPostTools(
         slug,
         type,
         post_type,
+        categories,
+        tags,
       });
 
       const parsedStatus = parseStatusOverride(status);
@@ -199,6 +237,8 @@ export function registerPostTools(
         status: parsedStatus.status,
         excerpt,
         slug,
+        categories,
+        tags,
       });
 
       if (isWpError(post)) {
