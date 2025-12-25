@@ -50,6 +50,11 @@ If your host does not support inline `env`, configure it to load `.env` or set
   Example: `type: "announcement"` routes to `/wp-json/wp/v2/announcement`.
 - `create_post` also supports `status` overrides like `announcement:draft` to
   target a CPT without a separate `type` arg.
+- Taxonomy tools are available for categories and tags (`list_*`, `get_*`,
+  `create_*`, `update_*`, `delete_*`).
+- `list_posts` accepts `categories`, `tags`, `categories_exclude`, and
+  `tags_exclude` filters; `create_post`/`update_post` accept `categories` and
+  `tags`.
 
 ## Sponsorship
 
