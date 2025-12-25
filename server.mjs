@@ -9,6 +9,7 @@ import { registerPageTools } from "./src/tools/pages.mjs";
 import { registerPostTools } from "./src/tools/posts.mjs";
 import { registerUserTools } from "./src/tools/users.mjs";
 
+// Entry point: load config, create client/resolver, register tools, and connect.
 console.error("MCP: process started");
 
 let config;

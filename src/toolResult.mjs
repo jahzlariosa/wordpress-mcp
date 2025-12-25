@@ -1,3 +1,4 @@
+// Formats tool results into MCP response shapes with optional structured content.
 function normalizeStructuredContent(data) {
   if (data === undefined || data === null) {
     return undefined;

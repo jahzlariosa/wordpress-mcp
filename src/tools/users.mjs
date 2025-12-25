@@ -4,6 +4,7 @@ import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
 import { buildQuery } from "../wpUtils.mjs";
 
+// Registers user management tools.
 export function registerUserTools(server, { wpFetch }) {
   server.tool(
     "list_users",

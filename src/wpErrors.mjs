@@ -1,5 +1,6 @@
 import { toolResult } from "./toolResult.mjs";
 
+// Helpers for normalizing WordPress REST errors into MCP tool responses.
 export function isWpError(result) {
   return result && typeof result === "object" && result.error;
 }

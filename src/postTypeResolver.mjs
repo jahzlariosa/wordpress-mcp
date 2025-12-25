@@ -1,5 +1,6 @@
 import { isParametrizedRestBase, normalizePostTypeInput } from "./wpUtils.mjs";
 
+// Default slug -> REST base mapping, used before fetching /types.
 const DEFAULT_REST_BASES = new Map([
   ["post", "posts"],
   ["posts", "posts"],
@@ -25,6 +26,7 @@ const DEFAULT_REST_BASES = new Map([
 
 const DEFAULT_REST_BASE_SET = new Set(DEFAULT_REST_BASES.values());
 
+// Resolves CPT slugs/rest bases, caching /types to avoid repeated fetches.
 export function createPostTypeResolver({ wpFetch, logger = console }) {
   let cache = null;
   let inFlight = null;

@@ -4,6 +4,7 @@ import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
 import { buildQuery } from "../wpUtils.mjs";
 
+// Registers page-specific tools.
 export function registerPageTools(
   server,
   { wpFetch, writePostLike, updatePostLike, resolvePostType }

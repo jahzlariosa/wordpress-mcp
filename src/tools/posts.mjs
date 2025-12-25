@@ -4,6 +4,7 @@ import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
 import { buildQuery, parseStatusOverride } from "../wpUtils.mjs";
 
+// Registers post/CPT tools with dynamic post type routing.
 export function registerPostTools(
   server,
   { wpFetch, writePostLike, updatePostLike, resolvePostType }

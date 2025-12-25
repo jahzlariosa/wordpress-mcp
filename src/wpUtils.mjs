@@ -1,3 +1,4 @@
+// Shared helpers for WordPress REST params and payloads.
 export function normalizeFormValue(value) {
   if (value && typeof value === "object" && !Array.isArray(value)) {
     if (Object.hasOwn(value, "raw")) {
@@ -68,6 +69,7 @@ export function normalizeWpTextField(value) {
   return String(value);
 }
 
+// Accepts slugs, REST bases, or full URLs and normalizes to a base token.
 export function normalizePostTypeInput(value) {
   if (value === undefined || value === null) {
     return "";
@@ -86,6 +88,7 @@ export function normalizePostTypeInput(value) {
   return slug;
 }
 
+// Allows "type:status" to select a CPT without a separate type field.
 export function parseStatusOverride(status) {
   if (typeof status !== "string") {
     return { status, postType: undefined };

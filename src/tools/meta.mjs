@@ -4,6 +4,7 @@ import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
 import { buildQuery } from "../wpUtils.mjs";
 
+// Registers meta/diagnostic tools like ping, post types, and plugins.
 export function registerMetaTools(server, { wpFetch }) {
   server.tool("ping", "Ping test", async () => {
     return toolResult({ ok: true }, { text: "ok" });

@@ -1,3 +1,4 @@
+// Reads required WordPress environment variables.
 export function getEnvConfig() {
   const { WP_URL, WP_USER, WP_APP_PASS } = process.env;
 

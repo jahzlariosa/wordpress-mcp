@@ -1,6 +1,7 @@
 import { isWpError, parseWpErrorCode } from "./wpErrors.mjs";
 import { buildFormBody, normalizeWpTextField } from "./wpUtils.mjs";
 
+// WordPress REST client with auth, logging, and empty_content retry handling.
 export function createWpClient({ wpUrl, wpUser, wpAppPass }, logger = console) {
   const authHeader =
     "Basic " + Buffer.from(`${wpUser}:${wpAppPass}`, "utf8").toString("base64");
@@ -66,6 +67,7 @@ export function createWpClient({ wpUrl, wpUser, wpAppPass }, logger = console) {
 
     logger.error("MCP: Response:", JSON.stringify(result).substring(0, 200));
 
+    // Retry with form-encoded payload if WP rejects JSON with empty_content.
     if (
       isWpError(result) &&
       result.status === 400 &&
