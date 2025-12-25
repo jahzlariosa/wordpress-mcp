@@ -58,8 +58,6 @@ If this project helps, consider supporting it:
   <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="160" alt="Buy Me a Coffee">
 </a>
 
-- buy_me_a_coffee: jahzlariosa
-
 ## Project Layout
 
 - `server.mjs`: entrypoint, tool registration
