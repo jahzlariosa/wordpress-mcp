@@ -1,5 +1,7 @@
 # WordPressMCP Server
 
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-jahzlariosa-FFDD00?logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jahzlariosa)
+
 Minimal MCP server that exposes WordPress REST tools over stdio. It supports
 posts, pages, users, plugins, and dynamic CPT routing via `type`/`post_type`.
 
@@ -47,6 +49,14 @@ If your host does not support inline `env`, configure it to load `.env` or set
   Example: `type: "announcement"` routes to `/wp-json/wp/v2/announcement`.
 - `create_post` also supports `status` overrides like `announcement:draft` to
   target a CPT without a separate `type` arg.
+
+## Sponsorship
+
+If this project helps, consider supporting it:
+
+[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/jahzlariosa)
+
+- buy_me_a_coffee: jahzlariosa
 
 ## Project Layout
 
