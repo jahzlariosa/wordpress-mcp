@@ -54,7 +54,9 @@ If your host does not support inline `env`, configure it to load `.env` or set
 
 If this project helps, consider supporting it:
 
-[![Buy Me a Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/jahzlariosa)
+<a href="https://www.buymeacoffee.com/jahzlariosa">
+  <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="160" alt="Buy Me a Coffee">
+</a>
 
 - buy_me_a_coffee: jahzlariosa
 
