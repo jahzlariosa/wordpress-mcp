@@ -95,6 +95,8 @@ export function registerPostTools(
       post_type: z.string().optional(),
       categories: stringOrNumberArray.optional(),
       tags: stringOrNumberArray.optional(),
+      featured_media: stringOrNumber.optional(),
+      featured_image: stringOrNumber.optional(),
       yoast: yoastMeta.optional(),
     },
     async ({
@@ -107,6 +109,8 @@ export function registerPostTools(
       post_type,
       categories,
       tags,
+      featured_media,
+      featured_image,
       yoast,
     } = {}) => {
       console.error("MCP: create_post called with:", {
@@ -119,6 +123,8 @@ export function registerPostTools(
         post_type,
         categories,
         tags,
+        featured_media,
+        featured_image,
         yoast,
       });
 
@@ -127,6 +133,7 @@ export function registerPostTools(
         post_type || type || parsedStatus.postType
       );
       const resolvedStatus = parsedStatus.status ?? "draft";
+      const featuredMedia = featured_media ?? featured_image;
 
       const post = await writePostLike(`/wp-json/wp/v2/${postType}`, {
         title,
@@ -136,6 +143,7 @@ export function registerPostTools(
         slug,
         categories,
         tags,
+        featured_media: featuredMedia,
         meta: buildYoastMeta(yoast),
       });
 
@@ -158,6 +166,8 @@ export function registerPostTools(
       slug: z.string().optional(),
       type: z.string().optional(),
       post_type: z.string().optional(),
+      featured_media: stringOrNumber.optional(),
+      featured_image: stringOrNumber.optional(),
       yoast: yoastMeta.optional(),
     },
     async ({
@@ -168,6 +178,8 @@ export function registerPostTools(
       slug,
       type,
       post_type,
+      featured_media,
+      featured_image,
       yoast,
     } = {}) => {
       console.error("MCP: create_announcement called with:", {
@@ -178,16 +190,20 @@ export function registerPostTools(
         slug,
         type,
         post_type,
+        featured_media,
+        featured_image,
         yoast,
       });
 
       const postType = await resolvePostType(post_type || type || "announcement");
+      const featuredMedia = featured_media ?? featured_image;
       const announcement = await writePostLike(`/wp-json/wp/v2/${postType}`, {
         title,
         content,
         status,
         excerpt,
         slug,
+        featured_media: featuredMedia,
         meta: buildYoastMeta(yoast),
       });
 
@@ -213,6 +229,8 @@ export function registerPostTools(
       post_type: z.string().optional(),
       categories: stringOrNumberArray.optional(),
       tags: stringOrNumberArray.optional(),
+      featured_media: stringOrNumber.optional(),
+      featured_image: stringOrNumber.optional(),
       yoast: yoastMeta.optional(),
     },
     async ({
@@ -226,6 +244,8 @@ export function registerPostTools(
       post_type,
       categories,
       tags,
+      featured_media,
+      featured_image,
       yoast,
     } = {}) => {
       console.error("MCP: update_post called with:", {
@@ -239,6 +259,8 @@ export function registerPostTools(
         post_type,
         categories,
         tags,
+        featured_media,
+        featured_image,
         yoast,
       });
 
@@ -246,6 +268,7 @@ export function registerPostTools(
       const postType = await resolvePostType(
         post_type || type || parsedStatus.postType
       );
+      const featuredMedia = featured_media ?? featured_image;
 
       const post = await updatePostLike(`/wp-json/wp/v2/${postType}/${id}`, {
         title,
@@ -255,6 +278,7 @@ export function registerPostTools(
         slug,
         categories,
         tags,
+        featured_media: featuredMedia,
         meta: buildYoastMeta(yoast),
       });
 

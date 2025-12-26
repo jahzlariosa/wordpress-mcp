@@ -24,6 +24,11 @@ npm install
 WP_URL="https://your-site.example"
 WP_USER="your-username"
 WP_APP_PASS="xxxx xxxx xxxx xxxx xxxx xxxx"
+# Optional image generation
+IMAGE_GEN_PROVIDER="openai"
+OPENAI_API_KEY="your-openai-api-key"
+OPENAI_BASE_URL="https://api.openai.com/v1"
+OPENAI_IMAGE_MODEL="gpt-image-1"
 ```
 
 3) Run the server:
@@ -56,6 +61,14 @@ If your host does not support inline `env`, configure it to load `.env` or set
 - `list_posts` accepts `categories`, `tags`, `categories_exclude`, and
   `tags_exclude` filters; `create_post`/`update_post` accept `categories` and
   `tags`.
+- Media tools are available for uploads (`upload_media`) and inspection
+  (`list_media`, `get_media`). Provide `data_base64`, a `data_url`, or
+  `source_url` (optionally with `source_headers`), then use the returned media
+  `id` as `featured_media` (or `featured_image`) on `create_post`,
+  `update_post`, `create_page`, and `update_page`.
+- Optional: `generate_image` uses the configured provider (currently OpenAI)
+  to return image data or URLs that can be fed into `upload_media`. Use
+  `response_format: "b64_json"` or `response_format: "url"` as needed.
 - Yoast SEO meta can be set via a `yoast` object on `create_post`, `update_post`,
   `create_page`, and `update_page` (title, description, focus keyphrase,
   keyphrase synonyms, related keyphrases, canonical, robots noindex/nofollow,

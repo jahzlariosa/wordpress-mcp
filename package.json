@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.25.1",
+    "buffer": "^6.0.3",
     "zod": "^4.2.1"
   }
 }

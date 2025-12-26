@@ -59,6 +59,8 @@ export function registerPageTools(
       excerpt: stringOrRaw.optional(),
       slug: z.string().optional(),
       parent: stringOrNumber.optional(),
+      featured_media: stringOrNumber.optional(),
+      featured_image: stringOrNumber.optional(),
       yoast: yoastMeta.optional(),
     },
     async ({
@@ -68,6 +70,8 @@ export function registerPageTools(
       excerpt,
       slug,
       parent,
+      featured_media,
+      featured_image,
       yoast,
     } = {}) => {
       console.error("MCP: create_page called with:", {
@@ -77,10 +81,13 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        featured_media,
+        featured_image,
         yoast,
       });
 
       const postType = await resolvePostType("page");
+      const featuredMedia = featured_media ?? featured_image;
       const page = await writePostLike(`/wp-json/wp/v2/${postType}`, {
         title,
         content,
@@ -88,6 +95,7 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        featured_media: featuredMedia,
         meta: buildYoastMeta(yoast),
       });
 
@@ -110,6 +118,8 @@ export function registerPageTools(
       excerpt: stringOrRaw.optional(),
       slug: z.string().optional(),
       parent: stringOrNumber.optional(),
+      featured_media: stringOrNumber.optional(),
+      featured_image: stringOrNumber.optional(),
       yoast: yoastMeta.optional(),
     },
     async ({
@@ -120,6 +130,8 @@ export function registerPageTools(
       excerpt,
       slug,
       parent,
+      featured_media,
+      featured_image,
       yoast,
     } = {}) => {
       console.error("MCP: update_page called with:", {
@@ -130,10 +142,13 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        featured_media,
+        featured_image,
         yoast,
       });
 
       const postType = await resolvePostType("page");
+      const featuredMedia = featured_media ?? featured_image;
       const page = await updatePostLike(`/wp-json/wp/v2/${postType}/${id}`, {
         title,
         content,
@@ -141,6 +156,7 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        featured_media: featuredMedia,
         meta: buildYoastMeta(yoast),
       });
 
