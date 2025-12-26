@@ -10,7 +10,7 @@ posts, pages, categories, tags, users, plugins, and dynamic CPT routing via
 
 - Node.js 18+ (fetch API required)
 - WordPress Application Password
-- Optional: WordPress MCP Helper plugin for Yoast SEO meta via REST: https://github.com/jahzlariosa/mcp-rest-helper
+- Optional: MCP REST Helper plugin for Yoast SEO meta via REST: https://github.com/jahzlariosa/mcp-rest-helper
 
 ## Setup
 
@@ -65,7 +65,7 @@ If your host does not support inline `env`, configure it to load `.env` or set
 
 ## WordPress Helper Plugin
 
-If you need to update Yoast SEO fields through the REST API, install the WordPress MCP Helper plugin from https://github.com/jahzlariosa/mcp-rest-helper.
+If you need to update Yoast SEO fields through the REST API, install the MCP REST Helper plugin from https://github.com/jahzlariosa/mcp-rest-helper.
 It registers the Yoast meta keys (including premium keyphrase fields when Yoast Premium is active) for all REST-enabled post types so MCP updates can persist.
 
 You can install it from GitHub:
