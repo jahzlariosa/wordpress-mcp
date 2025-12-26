@@ -1,8 +1,13 @@
 import { z } from "zod";
-import { stringOrNumber, stringOrNumberArray, stringOrRaw } from "../schemas.mjs";
+import {
+  stringOrNumber,
+  stringOrNumberArray,
+  stringOrRaw,
+  yoastMeta,
+} from "../schemas.mjs";
 import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
-import { buildQuery, parseStatusOverride } from "../wpUtils.mjs";
+import { buildQuery, buildYoastMeta, parseStatusOverride } from "../wpUtils.mjs";
 
 // Registers post/CPT tools with dynamic post type routing.
 export function registerPostTools(
@@ -90,6 +95,7 @@ export function registerPostTools(
       post_type: z.string().optional(),
       categories: stringOrNumberArray.optional(),
       tags: stringOrNumberArray.optional(),
+      yoast: yoastMeta.optional(),
     },
     async ({
       title,
@@ -101,6 +107,7 @@ export function registerPostTools(
       post_type,
       categories,
       tags,
+      yoast,
     } = {}) => {
       console.error("MCP: create_post called with:", {
         title,
@@ -112,6 +119,7 @@ export function registerPostTools(
         post_type,
         categories,
         tags,
+        yoast,
       });
 
       const parsedStatus = parseStatusOverride(status);
@@ -128,6 +136,7 @@ export function registerPostTools(
         slug,
         categories,
         tags,
+        meta: buildYoastMeta(yoast),
       });
 
       if (isWpError(post)) {
@@ -149,6 +158,7 @@ export function registerPostTools(
       slug: z.string().optional(),
       type: z.string().optional(),
       post_type: z.string().optional(),
+      yoast: yoastMeta.optional(),
     },
     async ({
       title,
@@ -158,6 +168,7 @@ export function registerPostTools(
       slug,
       type,
       post_type,
+      yoast,
     } = {}) => {
       console.error("MCP: create_announcement called with:", {
         title,
@@ -167,6 +178,7 @@ export function registerPostTools(
         slug,
         type,
         post_type,
+        yoast,
       });
 
       const postType = await resolvePostType(post_type || type || "announcement");
@@ -176,6 +188,7 @@ export function registerPostTools(
         status,
         excerpt,
         slug,
+        meta: buildYoastMeta(yoast),
       });
 
       if (isWpError(announcement)) {
@@ -200,6 +213,7 @@ export function registerPostTools(
       post_type: z.string().optional(),
       categories: stringOrNumberArray.optional(),
       tags: stringOrNumberArray.optional(),
+      yoast: yoastMeta.optional(),
     },
     async ({
       id,
@@ -212,6 +226,7 @@ export function registerPostTools(
       post_type,
       categories,
       tags,
+      yoast,
     } = {}) => {
       console.error("MCP: update_post called with:", {
         id,
@@ -224,6 +239,7 @@ export function registerPostTools(
         post_type,
         categories,
         tags,
+        yoast,
       });
 
       const parsedStatus = parseStatusOverride(status);
@@ -239,6 +255,7 @@ export function registerPostTools(
         slug,
         categories,
         tags,
+        meta: buildYoastMeta(yoast),
       });
 
       if (isWpError(post)) {

@@ -69,6 +69,40 @@ export function normalizeWpTextField(value) {
   return String(value);
 }
 
+export function buildYoastMeta(yoast = {}) {
+  if (!yoast || typeof yoast !== "object") {
+    return undefined;
+  }
+
+  const meta = {};
+  const setIfDefined = (key, value) => {
+    if (value !== undefined) {
+      meta[key] = value;
+    }
+  };
+
+  setIfDefined("_yoast_wpseo_title", yoast.title);
+  setIfDefined("_yoast_wpseo_metadesc", yoast.description);
+  setIfDefined("_yoast_wpseo_focuskw", yoast.focuskw);
+  setIfDefined("_yoast_wpseo_focuskw_synonyms", yoast.focuskw_synonyms);
+  setIfDefined("_yoast_wpseo_focuskeywords", yoast.focuskeywords);
+  setIfDefined("_yoast_wpseo_keywordsynonyms", yoast.keywordsynonyms);
+  setIfDefined("_yoast_wpseo_canonical", yoast.canonical);
+  setIfDefined("_yoast_wpseo_opengraph-title", yoast.og_title);
+  setIfDefined("_yoast_wpseo_opengraph-description", yoast.og_description);
+  setIfDefined("_yoast_wpseo_twitter-title", yoast.twitter_title);
+  setIfDefined("_yoast_wpseo_twitter-description", yoast.twitter_description);
+
+  if (yoast.noindex !== undefined) {
+    meta["_yoast_wpseo_meta-robots-noindex"] = yoast.noindex ? 1 : 0;
+  }
+  if (yoast.nofollow !== undefined) {
+    meta["_yoast_wpseo_meta-robots-nofollow"] = yoast.nofollow ? 1 : 0;
+  }
+
+  return Object.keys(meta).length ? meta : undefined;
+}
+
 // Accepts slugs, REST bases, or full URLs and normalizes to a base token.
 export function normalizePostTypeInput(value) {
   if (value === undefined || value === null) {

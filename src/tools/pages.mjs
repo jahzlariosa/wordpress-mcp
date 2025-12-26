@@ -1,8 +1,8 @@
 import { z } from "zod";
-import { stringOrNumber, stringOrRaw } from "../schemas.mjs";
+import { stringOrNumber, stringOrRaw, yoastMeta } from "../schemas.mjs";
 import { toolResult } from "../toolResult.mjs";
 import { isWpError, wpErrorToolResult } from "../wpErrors.mjs";
-import { buildQuery } from "../wpUtils.mjs";
+import { buildQuery, buildYoastMeta } from "../wpUtils.mjs";
 
 // Registers page-specific tools.
 export function registerPageTools(
@@ -59,6 +59,7 @@ export function registerPageTools(
       excerpt: stringOrRaw.optional(),
       slug: z.string().optional(),
       parent: stringOrNumber.optional(),
+      yoast: yoastMeta.optional(),
     },
     async ({
       title,
@@ -67,6 +68,7 @@ export function registerPageTools(
       excerpt,
       slug,
       parent,
+      yoast,
     } = {}) => {
       console.error("MCP: create_page called with:", {
         title,
@@ -75,6 +77,7 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        yoast,
       });
 
       const postType = await resolvePostType("page");
@@ -85,6 +88,7 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        meta: buildYoastMeta(yoast),
       });
 
       if (isWpError(page)) {
@@ -106,6 +110,7 @@ export function registerPageTools(
       excerpt: stringOrRaw.optional(),
       slug: z.string().optional(),
       parent: stringOrNumber.optional(),
+      yoast: yoastMeta.optional(),
     },
     async ({
       id,
@@ -115,6 +120,7 @@ export function registerPageTools(
       excerpt,
       slug,
       parent,
+      yoast,
     } = {}) => {
       console.error("MCP: update_page called with:", {
         id,
@@ -124,6 +130,7 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        yoast,
       });
 
       const postType = await resolvePostType("page");
@@ -134,6 +141,7 @@ export function registerPageTools(
         excerpt,
         slug,
         parent,
+        meta: buildYoastMeta(yoast),
       });
 
       if (isWpError(page)) {

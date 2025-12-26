@@ -10,6 +10,7 @@ posts, pages, categories, tags, users, plugins, and dynamic CPT routing via
 
 - Node.js 18+ (fetch API required)
 - WordPress Application Password
+- Optional: WordPress MCP Helper plugin for Yoast SEO meta via REST: https://github.com/jahzlariosa/mcp-rest-helper
 
 ## Setup
 
@@ -55,6 +56,22 @@ If your host does not support inline `env`, configure it to load `.env` or set
 - `list_posts` accepts `categories`, `tags`, `categories_exclude`, and
   `tags_exclude` filters; `create_post`/`update_post` accept `categories` and
   `tags`.
+- Yoast SEO meta can be set via a `yoast` object on `create_post`, `update_post`,
+  `create_page`, and `update_page` (title, description, focus keyphrase,
+  keyphrase synonyms, related keyphrases, canonical, robots noindex/nofollow,
+  and OG/Twitter overrides). Premium fields require Yoast Premium to be active.
+- Premium Yoast fields available in `yoast`: `focuskw_synonyms`,
+  `focuskeywords`, `keywordsynonyms` (provide the raw Yoast string/JSON format).
+
+## WordPress Helper Plugin
+
+If you need to update Yoast SEO fields through the REST API, install the WordPress MCP Helper plugin from https://github.com/jahzlariosa/mcp-rest-helper.
+It registers the Yoast meta keys (including premium keyphrase fields when Yoast Premium is active) for all REST-enabled post types so MCP updates can persist.
+
+You can install it from GitHub:
+
+- Download the zip from https://github.com/jahzlariosa/mcp-rest-helper/releases and unzip it into `wp-content/plugins/`.
+- Or clone directly: `git clone https://github.com/jahzlariosa/mcp-rest-helper.git` into `wp-content/plugins/mcp-rest-helper`.
 
 ## Sponsorship
 
